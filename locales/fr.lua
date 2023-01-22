@@ -4,9 +4,9 @@ Locales['fr'] = {
     ['info.mount_pump'] = "[~g~E~w~] Placer",
     ['info.dismount_pump'] = "[~r~E~w~] Retirer",
     ['info.info_pump'] = "Placez le pistolet sur le véhicule pour faire le plein",
-    ['info.refilling'] = "Service: %{value}L<br>Prix: $%{value2}",
-    ['info.jerrican_refilling'] = "Service: %{value}L",
-    ['info.recharging'] = "Service: %{value}Kw<br>Prix: $%{value2}",
+    ['info.refilling'] = "Service: %sL<br>Prix: $%s",
+    ['info.jerrican_refilling'] = "Service: %sL",
+    ['info.recharging'] = "Service: %sKw<br>Prix: $%s",
     ['info.blip_fuel'] = "Station service",
     ['info.blip_electric'] = "Chargeur electrique",
 
