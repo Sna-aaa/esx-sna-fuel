@@ -116,7 +116,7 @@ end
 
 RegisterNetEvent("esx-fuel:BuyJerrican", function(data)
     local ped = PlayerPedId()
-    local currentCash = ESX.GetPlayerData().money['cash']
+    local currentCash = ESX.GetPlayerData().money
 
     if not HasPedGotWeapon(ped, 883325847) then
         if currentCash >= Config.JerryCanCost then

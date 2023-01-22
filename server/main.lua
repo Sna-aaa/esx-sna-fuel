@@ -11,7 +11,7 @@ end)
 RegisterServerEvent('esx-fuel:server:GiveJerrican', function()
     local src = source
     local Player = ESX.GetPlayerFromId(src)
-    Player.addInventoryItem('weapon_petrolcan', 1)
+    Player.addWeapon('weapon_petrolcan', 4500)
     --TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items["weapon_petrolcan"], "add")
 end)
 
