@@ -243,7 +243,12 @@ RegisterNetEvent("esx-fuel:RefuelVehicle", function(ped, vehicle)
         currentFuel = currentFuel + fuelToAdd
         if currentFuel <= tank then
             if CurrentPump == "can" then
-                local fuelToRemove = 4500 / Config.JerryCanCapacity * fuelToAdd
+                local fuelToRemove
+                if Config.JerryCanWeaponAsItem then
+                    fuelToRemove = 100 / Config.JerryCanCapacity * fuelToAdd
+                else
+                    fuelToRemove = 4500 / Config.JerryCanCapacity * fuelToAdd
+                end
                 if GetAmmoInPedWeapon(ped, 883325847) - fuelToRemove >= 0 then
                     local ammo = math.floor(GetAmmoInPedWeapon(ped, 883325847) - fuelToRemove)
                     SetPedAmmo(ped, 883325847, ammo)
