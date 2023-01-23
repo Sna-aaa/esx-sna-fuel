@@ -117,7 +117,6 @@ end
 RegisterNetEvent("esx-fuel:BuyJerrican", function(data)
     local ped = PlayerPedId()
     local currentCash = ESX.GetPlayerData().money
-
     if not HasPedGotWeapon(ped, 883325847) then
         if currentCash >= Config.JerryCanCost then
             TriggerServerEvent('esx-fuel:server:Pay', Config.JerryCanCost)
@@ -458,7 +457,7 @@ CreateThread(function()
             end
         else
             if GetSelectedPedWeapon(ped) == 883325847 then
-                if GetAmmoInPedWeapon(ped, 883325847) > 100 and not CurrentCapPos then
+                if GetAmmoInPedWeapon(ped, 883325847) >= 100 and not CurrentCapPos then
                     CurrentPump = "can"
                     DetectPetrolCap(nil)
                 end
