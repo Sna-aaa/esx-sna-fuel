@@ -23,6 +23,19 @@ Package : https://github.com/Sna-aaa/esx-sna-fuel
 - A new export "ApplyFuel" to apply fuel without electric charge for persistence scripts
 - Server synced nozzles and hozes
 
+## Hud
+This resource doesn't use standard GTA fuel level anymore, so to adapt your hud:
+Verify if your hud is LegacyFuel compatible, to do so open the client script and search for:
+GetVehicleFuelLevel(vehicle)                Resource is not LegacyFuel compatible
+exports['LegacyFuel']:GetFuel(vehicle)      Resource is LegacyFuel compatible
+For LegacyFuel compatible resources, just replace "LegacyFuel" with "sna-fuel" or what you named the directory of this script
+For not compatible resources, you can replace GetVehicleFuelLevel(vehicle) by exports['sna-fuel']:GetFuel(vehicle)
+
+## Jerrican
+Depending of your inventory script jerricans can work differently, there is an option in config
+Config.JerryCanWeaponAsItem
+That you can change to have working jerricans
+
 ## Requirements
 - [esx_extended]()
 - [ox_target](https://github.com/overextended/ox_target)
@@ -69,5 +82,4 @@ local function enterVehicle(veh, indexgarage, type, garage)
     end
 end
 ```
-
 ## ToDo
