@@ -50,10 +50,11 @@ ESX.RegisterServerCallback('esx-fuel:server:GetTimeInGarage', function(source, c
 end)
 
 ESX.RegisterCommand("fuel", 'admin', function(xPlayer, args, showError)
-    local src = source
-    local amount = tonumber(args[1])
+    local amount = tonumber(args.amount)
     if not amount then
         amount = 100
     end
-    TriggerClientEvent("esx-fuel:SetFuel", src, amount)
-end, true, {help = "Set fuel/charge for vehicle"})
+    xPlayer.triggerEvent('esx-fuel:SetFuel', amount)
+end, false, {help = "Set fuel/charge for vehicle", validate = false, arguments = {
+	{name = 'amount',validate = false, help = "Amount", type = 'string'}
+}}) 
