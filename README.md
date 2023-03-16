@@ -47,7 +47,20 @@ That you can change to have working jerricans
 
 2) Replace all occurences of "LegacyFuel" by "esx-sna-fuel" (or wathever your directory name is) in all your server resources exports
 
-3) If you want to use the auto charging function for electric vehicles in garage:
+3) Replace also all occurences of "GetVehicleFuelLevel" and replace the statement by exports['sna-fuel']:GetFuel(vehicle)
+Exemple around line 740 of es_extended/client/functions
+```lua
+        bodyHealth = ESX.Math.Round(GetVehicleBodyHealth(vehicle), 1),
+        engineHealth = ESX.Math.Round(GetVehicleEngineHealth(vehicle), 1),
+        tankHealth = ESX.Math.Round(GetVehiclePetrolTankHealth(vehicle), 1),
+
+        fuelLevel = ESX.Math.Round(exports['sna-fuel']:GetFuel(vehicle), 1),    --Change
+        dirtLevel = ESX.Math.Round(GetVehicleDirtLevel(vehicle), 1),
+        color1 = colorPrimary,
+        color2 = colorSecondary,
+
+```
+4) If you want to use the auto charging function for electric vehicles in garage:
 - Import the database.sql in your database
 - In your garage script a line with UpdateVehicleDateTimeIn must be added when you park the car just before the vehicle deletion, here in qb-garage
 ```lua
