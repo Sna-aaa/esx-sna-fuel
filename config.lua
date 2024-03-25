@@ -4,7 +4,7 @@ Config.Locale                     = 'en'
 
 Config.JerryCanCost = 100
 Config.JerryCanCapacity = 25
-Config.JerryCanWeaponAsItem = false         --For use with inventory systems that have weapons as item
+Config.JerryCanWeaponAsItem = true         --For use with inventory systems that have weapons as item
 
 Config.LiterPrice = 1.7
 Config.KwPrice = 0.3

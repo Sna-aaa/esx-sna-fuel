@@ -1,6 +1,6 @@
 local ESX = nil
 
-TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+ESX = exports["es_extended"]:getSharedObject()
 
 RegisterServerEvent('esx-fuel:server:Pay', function(amount)
     local src = source

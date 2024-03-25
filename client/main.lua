@@ -1,6 +1,6 @@
 local ESX = nil
 
-TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+ESX = exports["es_extended"]:getSharedObject()
 local CurrentWeaponData
 
 local CurrentPumpProp
@@ -60,13 +60,15 @@ end
 exports('SetFuel', SetFuel)
 
 CreateThread(function() -- Set target for pumps and blips
-    local Pumps = {}
+    local FuelPumps = {}
 
     for v, w in pairs(Config.PumpModels) do
-        table.insert(Pumps, v)
+        if not w.electric then
+            table.insert(FuelPumps, v)            
+        end
     end
     Wait(100)
-    exports['qb-target']:AddTargetModel(Pumps, {
+    exports['qb-target']:AddTargetModel(FuelPumps, {
         options = {{
             event = "esx-fuel:PickupPump",
             icon = "fas fa-gas-pump",
@@ -81,6 +83,25 @@ CreateThread(function() -- Set target for pumps and blips
         job = {"all"},
         distance = Config.MaxDistance
     })
+    local ElecPumps = {}
+
+    for v, w in pairs(Config.PumpModels) do
+        if w.electric then
+            table.insert(ElecPumps, v)            
+        end
+    end
+    Wait(100)
+    exports['qb-target']:AddTargetModel(ElecPumps, {
+        options = {{
+            event = "esx-fuel:PickupPump",
+            icon = "fas fa-gas-pump",
+            label = _U("info.pickup_pump"),
+            entity = entity
+        }},
+        job = {"all"},
+        distance = Config.MaxDistance
+    })
+
     for _, gasStationCoords in pairs(Config.GasStations) do
         local blip = AddBlipForCoord(gasStationCoords.x, gasStationCoords.y, gasStationCoords.z)
 
@@ -214,7 +235,14 @@ end)
 
 RegisterNetEvent("esx-fuel:RefuelVehicle", function(ped, vehicle)
     local startingfuel = DecorGetFloat(vehicle, Config.FuelDecor)
-    local startingCash = ESX.GetPlayerData().money
+    local accounts = ESX.GetPlayerData().accounts
+    local startingCash = 0
+    for i = 1, #accounts do
+        print(accounts[i].name, accounts[i].money)
+        if accounts[i].name == 'money' then
+            startingCash = accounts[i].money
+        end
+    end
     local vehname = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)):lower()
     local tank
     if Config.TankSizes[vehname] then
